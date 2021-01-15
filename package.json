@@ -25,6 +25,21 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn format:check"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,less,md,ts,html,graphql}": [
+      "yarn format --uncommitted"
+    ],
+    "nx.json": [
+      "yarn nxpm-stack lint",
+      "yarn format:write"
+    ]
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {
@@ -35,6 +50,8 @@
     "@nrwl/nx-plugin": "^11.1.5",
     "@nrwl/tao": "11.1.5",
     "@nrwl/workspace": "11.1.5",
+    "@nxpm/cli": "^4.4.6",
+    "@nxpm/stack": "^4.4.6",
     "@types/jest": "26.0.8",
     "@types/node": "12.12.38",
     "@typescript-eslint/eslint-plugin": "4.3.0",
@@ -42,8 +59,10 @@
     "dotenv": "6.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
+    "husky": "^4.3.7",
     "jest": "26.2.2",
-    "prettier": "2.2.1",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
     "ts-jest": "26.4.0",
     "ts-node": "~9.1.1",
     "tslib": "^2.0.0",

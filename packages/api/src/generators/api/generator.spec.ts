@@ -1,20 +1,20 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing'
+import { Tree, readProjectConfiguration } from '@nrwl/devkit'
 
-import generator from './generator';
-import { ApiGeneratorSchema } from './schema';
+import generator from './generator'
+import { ApiGeneratorSchema } from './schema'
 
 describe('api generator', () => {
-  let appTree: Tree;
-  const options: ApiGeneratorSchema = { name: 'test' };
+  let appTree: Tree
+  const options: ApiGeneratorSchema = { name: 'test' }
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
-  });
+    appTree = createTreeWithEmptyWorkspace()
+  })
 
   it('should run successfully', async () => {
-    await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
-    expect(config).toBeDefined();
-  });
-});
+    await generator(appTree, options)
+    const config = readProjectConfiguration(appTree, 'test')
+    expect(config).toBeDefined()
+  })
+})
