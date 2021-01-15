@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "id": "Api",
+  "id": "Application",
   "title": "",
   "type": "object",
   "properties": {
@@ -23,6 +23,15 @@
       "type": "string",
       "description": "A directory where the project is placed",
       "alias": "d"
+    },
+    "type": {
+      "type": "string",
+      "items": {
+        "enum": ["nest"],
+        "type": "string"
+      },
+      "description": "The type of API you want to generate",
+      "alias": "t"
     }
   },
   "required": ["name"]

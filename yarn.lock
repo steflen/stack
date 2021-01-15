@@ -1316,6 +1316,18 @@
     "@nrwl/jest" "10.4.10"
     "@nrwl/node" "10.4.10"
 
+"@nrwl/nest@^11.1.5":
+  version "11.1.5"
+  resolved "https://registry.yarnpkg.com/@nrwl/nest/-/nest-11.1.5.tgz#921e21500978332c69c69de3431f86ba2185e315"
+  integrity sha512-yybVU2ek7f732M9oGaSi4iDRy+3DtaSNXHUQg8qSfygwsHCE+WanQfuEJZah1f7oeWAiEaXhMG4b8SIhovXvcA==
+  dependencies:
+    "@angular-devkit/core" "~11.0.1"
+    "@angular-devkit/schematics" "~11.0.1"
+    "@nestjs/schematics" "^7.0.0"
+    "@nrwl/devkit" "11.1.5"
+    "@nrwl/jest" "11.1.5"
+    "@nrwl/node" "11.1.5"
+
 "@nrwl/node@10.4.10":
   version "10.4.10"
   resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-10.4.10.tgz#f2afd87361b16e7ffcfa8814f3e5cd726aa69c7c"

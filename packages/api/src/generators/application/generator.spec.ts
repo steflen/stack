@@ -1,12 +1,12 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing'
-import { Tree, readProjectConfiguration } from '@nrwl/devkit'
+import { readProjectConfiguration, Tree } from '@nrwl/devkit'
 
 import generator from './generator'
-import { ApiGeneratorSchema } from './schema'
+import { ApplicationGeneratorSchema, ApplicationType } from './schema'
 
 describe('api generator', () => {
   let appTree: Tree
-  const options: ApiGeneratorSchema = { name: 'test' }
+  const options: ApplicationGeneratorSchema = { name: 'test', type: ApplicationType.nest }
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace()

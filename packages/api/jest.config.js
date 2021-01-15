@@ -1,4 +1,6 @@
 module.exports = {
+  testEnvironment: 'node',
+  testTimeout: 60000,
   displayName: 'api',
   preset: '../../jest.preset.js',
   globals: {

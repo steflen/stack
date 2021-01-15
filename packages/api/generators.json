@@ -3,10 +3,11 @@
   "name": "api",
   "version": "0.0.1",
   "generators": {
-    "api": {
-      "factory": "./src/generators/api/generator",
-      "schema": "./src/generators/api/schema.json",
-      "description": "api generator"
+    "application": {
+      "factory": "./src/generators/application/generator",
+      "schema": "./src/generators/application/schema.json",
+      "description": "application generator",
+      "alias": ["app"]
     }
   }
 }

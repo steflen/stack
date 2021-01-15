@@ -8,16 +8,17 @@ import {
   Tree,
 } from '@nrwl/devkit'
 import * as path from 'path'
-import { ApiGeneratorSchema } from './schema'
+import { ApplicationGeneratorSchema } from './schema'
+import { applicationGenerator } from '@nrwl/nest'
 
-interface NormalizedSchema extends ApiGeneratorSchema {
+interface NormalizedSchema extends ApplicationGeneratorSchema {
   projectName: string
   projectRoot: string
   projectDirectory: string
   parsedTags: string[]
 }
 
-function normalizeOptions(host: Tree, options: ApiGeneratorSchema): NormalizedSchema {
+function normalizeOptions(host: Tree, options: ApplicationGeneratorSchema): NormalizedSchema {
   const name = names(options.name).fileName
   const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-')
@@ -43,19 +44,15 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   generateFiles(host, path.join(__dirname, 'files'), options.projectRoot, templateOptions)
 }
 
-export default async function (host: Tree, options: ApiGeneratorSchema) {
+export default async function (host: Tree, options: ApplicationGeneratorSchema) {
+  // if (options.type !== ApplicationType.nest) {
+  //   throw new Error(`Unknown type ${options.type}`)
+  // }
   const normalizedOptions = normalizeOptions(host, options)
-  addProjectConfiguration(host, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: '@nxpm/api:build',
-      },
-    },
-    tags: normalizedOptions.parsedTags,
+  applicationGenerator({
+    name: normalizedOptions.projectName,
   })
+
   addFiles(host, normalizedOptions)
   await formatFiles(host)
 }
