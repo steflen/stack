@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "projects": {
+    "api": {
+      "root": "packages/api",
+      "sourceRoot": "packages/api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/api/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/api"
+          ],
+          "options": {
+            "jestConfig": "packages/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/api",
+            "tsConfig": "packages/api/tsconfig.lib.json",
+            "packageJson": "packages/api/package.json",
+            "main": "packages/api/src/index.ts",
+            "assets": [
+              "packages/api/*.md",
+              {
+                "input": "./packages/api/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/api",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/api",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "api-e2e": {
+      "projectType": "application",
+      "root": "e2e/api-e2e",
+      "sourceRoot": "e2e/api-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "api:build",
+            "npmPackageName": "@nxpm/api",
+            "pluginOutputPath": "dist/packages/api",
+            "jestConfig": "e2e/api-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
