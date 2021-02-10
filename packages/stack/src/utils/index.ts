@@ -168,9 +168,11 @@ export function normalizeOptions<T extends BaseSchema>(options: T, projectType: 
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-')
   const projectRoot = `${projectRootDir(projectType)}/${projectDirectory}`
   const parsedTags = options.tags ? options.tags.split(',').map((s) => s.trim()) : []
+  const appName = options.appName || nxJson.plugins['@nxpm/stack']?.web?.project || 'web'
 
   return {
     ...options,
+    appName,
     npmScope: nxJson.npmScope,
     projectName,
     projectRoot,

@@ -1,0 +1,20 @@
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
+
+<% if (type === 'data-access') { %>import { <%= classify(projectName) %>Service } from './<%= projectName %>.service'<% } %>
+<% if (type !== 'data-access') { %>import { <%= classify(projectName) %>Component } from './<%= projectName %>.component'<% } %>
+
+@NgModule({
+  declarations: [<% if (type !== 'data-access') { %><%= classify(projectName) %>Component<% } %>],
+  imports: [
+    CommonModule,
+    RouterModule<% if (type === 'feature') { %>.forChild([
+      { path: '', pathMatch: 'full', component: <%= classify(projectName) %>Component }
+    ])<% } %>,
+  ],
+  providers: [
+    <% if (type === 'data-access') { %><%= classify(projectName) %>Service<% } %>
+  ]
+})
+export class <%= classify(projectName) %>Module {}

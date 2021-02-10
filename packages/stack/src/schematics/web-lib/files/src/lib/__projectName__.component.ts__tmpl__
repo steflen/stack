@@ -1,0 +1,11 @@
+import { Component } from '@angular/core'
+
+@Component({
+  <% if (type === 'ui') { %>selector: 'ui-<%= name %>',<% } %>
+  template: `
+    <pre class="flex justify-between items-center border border-indigo-500 rounded-lg p-2 text-sm mt-6 w-full"><%= classify(projectName) %>Component</pre>
+  `,
+})
+export class <%= classify(projectName) %>Component {
+  constructor() {}
+}

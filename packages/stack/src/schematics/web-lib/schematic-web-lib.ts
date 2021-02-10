@@ -1,6 +1,6 @@
 import { chain, externalSchematic, Rule } from '@angular-devkit/schematics'
 import { ProjectType } from '@nrwl/workspace'
-import { addFiles, createProjectName, normalizeOptions } from '../../utils'
+import { addFiles, createProjectName, normalizeOptions, removeFiles } from '../../utils'
 import { WebLibSchematicSchema } from './schema'
 
 export default function (options: WebLibSchematicSchema): Rule {
@@ -12,6 +12,10 @@ export default function (options: WebLibSchematicSchema): Rule {
   const normalizedOptions = normalizeOptions<WebLibSchematicSchema>(
     { ...options, directory, name },
     ProjectType.Library,
+  )
+  console.log(
+    `${normalizedOptions.appName}-${name.replace('/', '-')}.component.ts`,
+    `${normalizedOptions.appName}-${name.replace('/', '-')}.service.ts`,
   )
   return chain([
     externalSchematic('@nrwl/angular', 'library', {
@@ -27,5 +31,11 @@ export default function (options: WebLibSchematicSchema): Rule {
       linter: 'eslint',
     }),
     addFiles(normalizedOptions),
+    removeFiles(
+      options?.type === 'data-access'
+        ? [`${normalizedOptions.appName}-${name.replace('/', '-')}.component.ts`]
+        : [`${normalizedOptions.appName}-${name.replace('/', '-')}.service.ts`],
+      `${normalizedOptions.projectRoot}/src/lib/`,
+    ),
   ])
 }
